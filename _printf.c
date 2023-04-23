@@ -1,22 +1,29 @@
 #include "main.h"
 #include <stdarg.h>
+#include <stdio.h>
 #include <unistd.h>
 
-#define BUFF_SIZE 1024
+/**
+ * sum_them_all - calculates the sum of all its parameters
+ * @n: number of arguments passed to the function
+ *
+ * Return: the resulting sum
+ */
 
-int printstring(char *s, int len)
+int printstring(char* s, int len)
 {
-    return (write(1, s, len));
+    write(1, s, len);
+    return (0);
 }
-
 int printchar(char c)
 {
-    return (write(1, &c, 1));
-}
+    write(1, &c, 1);
+    return (0);
 
-unsigned long int _strlen(char *s)
+}
+unsigned long int strlen(const char* s)
 {
-    unsigned long int i = 0;
+    int i = 0;
 
     while (s[i] != '\0')
     {
@@ -25,74 +32,51 @@ unsigned long int _strlen(char *s)
 
     return (i);
 }
-
-void print_buffer(char buffer[], int *buff_ind)
+int _printf(const char* const format, ...)
 {
-    if (*buff_ind > 0)
-    {
-        write(1, &buffer[0], *buff_ind);
-        *buff_ind = 0;
-    }
-}
-
-int _printf(const char *format, ...)
-{
-    int i, count = 0, buff_ind = 0;
-    char c, *s;
-    int len, printed_chars = 0;
+    int i;
+    int count = 0;
+    char c;
+    char* s;
+    int len;
     va_list args;
-    char buffer[BUFF_SIZE];
-
-    if (format == NULL)
-        return (-1);
 
     va_start(args, format);
-    for (i = 0; format && format[i] != '\0'; i++)
+    if (format == NULL)
     {
-        if (format[i] == '%')
-        {
-            print_buffer(buffer, &buff_ind);
-
-            switch (format[i + 1])
-            {
-            case 'c':
-                c = va_arg(args, int);
-                printed_chars += printchar(c);
-                break;
-
-            case 's':
-                s = va_arg(args, char *);
-                len = _strlen(s);
-                printed_chars += printstring(s, len);
-                break;
-
-            case '%':
-                printed_chars += printchar('%');
-                break;
-
-            default:
-                printed_chars += printchar(format[i]);
-                printed_chars += printchar(format[i + 1]);
-                break;
-            }
-            i++;
-        }
-        else
-        {
-            buffer[buff_ind++] = format[i];
-            if (buff_ind == BUFF_SIZE)
-            {
-                print_buffer(buffer, &buff_ind);
-                printed_chars += BUFF_SIZE;
-            }
-            else
-            {
-                printed_chars++;
-            }
-        }
+        return (-1);
     }
-    va_end(args);
-    print_buffer(buffer, &buff_ind);
-    return (printed_chars);
-}
+    if (format) {
+        for (i = 0; format && format[i] != '\0'; i++)
+        {
+            if (format[i] == '%')
+            {
 
+                switch (format[i + 1])
+                {
+                case 'c':
+                    c = va_arg(args, int);
+                    printchar(c);
+                    count++;
+                    break;
+                case 's':
+                    s = va_arg(args, char*);
+                    len = strlen(s);
+                    printstring(s, len);
+                    count = count + len;
+                    break;
+
+
+
+                }
+            }
+            if (!((format[i] == '%' || format[i - 1] == '%') && ((format[i + 1] == 's' || format[i + 1] == 'c') || (format[i] == 's' || format[i] == 'c'))))
+            {
+                printchar(format[i]);
+                count++;
+            }
+        }
+        va_end(args);
+    }
+    return (count);
+}

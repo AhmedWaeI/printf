@@ -115,5 +115,5 @@ long int convert_size_number(long int num, int size);
 long int convert_size_unsgnd(unsigned long int num, int size);
 int printstring(char* s, int len);
 int printchar(char c);
-unsigned long int strlen(char* s);
+unsigned long int strlen(const char* s);
 #endif /* MAIN_H */
