@@ -3,83 +3,104 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int printstring(char* s, int len) {
-    if (write(1, s, len) == -1) {
-        return -1;
-    }
-    return 0;
+#define BUFF_SIZE 1024
+
+int printstring(char* s, int len)
+{
+    write(1, s, len);
+    return (0);
 }
 
-int printchar(char c) {
-    if (write(1, &c, 1) == -1) {
-        return -1;
-    }
-    return 0;
+int printchar(char c)
+{
+    write(1, &c, 1);
+    return (0);
 }
 
-unsigned long int strlen(char* s) {
+unsigned long int strlen(char* s)
+{
     int i = 0;
 
-    while (s[i] != '\0') {
+    while (s[i] != '\0')
+    {
         i++;
     }
 
     return (i);
 }
 
-int _printf(const char* const format, ...) {
-    int i;
-    int count = 0;
-    char c;
-    char* s;
-    int len;
-    va_list args;
-
-    va_start(args, format);
-
+int _printf(const char* const format, ...)
+{
     if (format == NULL) {
         return -1;
     }
 
-    for (i = 0; format[i] != '\0'; i++) {
-        if (format[i] == '%') {
-            if (format[i + 1] == '\0') {
-                return -1; // error: incomplete format specifier
-            }
+    int count = 0;
+    char buffer[BUFF_SIZE];
+    int buff_ind = 0;
+    va_list args;
 
-            switch (format[i + 1]) {
+    va_start(args, format);
+
+    for (int i = 0; format[i] != '\0'; i++)
+    {
+        if (format[i] == '%')
+        {
+            i++;
+
+            switch (format[i])
+            {
                 case 'c':
-                    c = va_arg(args, int);
-                    if (printchar(c) == -1) {
-                        return -1; // error: failed to print char
+                {
+                    char c = va_arg(args, int);
+                    buffer[buff_ind++] = c;
+                    if (buff_ind == BUFF_SIZE) {
+                        printstring(buffer, buff_ind);
+                        buff_ind = 0;
                     }
                     count++;
                     break;
+                }
                 case 's':
-                    s = va_arg(args, char*);
-                    len = strlen(s);
-                    if (printstring(s, len) == -1) {
-                        return -1; // error: failed to print string
+                {
+                    char* s = va_arg(args, char*);
+                    int len = strlen(s);
+                    for (int j = 0; j < len; j++) {
+                        buffer[buff_ind++] = s[j];
+                        if (buff_ind == BUFF_SIZE) {
+                            printstring(buffer, buff_ind);
+                            buff_ind = 0;
+                        }
                     }
-                    count = count + len;
+                    count += len;
                     break;
+                }
                 case '%':
-                    if (printchar('%') == -1) {
-                        return -1; // error: failed to print '%'
+                {
+                    buffer[buff_ind++] = '%';
+                    if (buff_ind == BUFF_SIZE) {
+                        printstring(buffer, buff_ind);
+                        buff_ind = 0;
                     }
                     count++;
                     break;
+                }
                 default:
-                    return -1; // error: invalid conversion specifier
+                    return -1;
             }
-            i++; // skip over conversion specifier character
-        } else {
-            if (printchar(format[i]) == -1) {
-                return -1; // error: failed to print character
+        }
+        else
+        {
+            buffer[buff_ind++] = format[i];
+            if (buff_ind == BUFF_SIZE) {
+                printstring(buffer, buff_ind);
+                buff_ind = 0;
             }
             count++;
         }
     }
+
+    printstring(buffer, buff_ind);
 
     va_end(args);
 
