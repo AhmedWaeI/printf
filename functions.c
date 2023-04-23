@@ -12,12 +12,11 @@
  * @size: Size specifier
  * Return: Number of chars printed
  */
-int print_char(va_list types, char buffer[],
-	int flags, int width, int precision, int size)
+int printchar(char c)
 {
-	char c = va_arg(types, int);
+    write(1, &c, 1);
+    return (0);
 
-	return (handle_write_char(c, buffer, flags, width, precision, size));
 }
 /************************* PRINT A STRING *************************/
 /**
