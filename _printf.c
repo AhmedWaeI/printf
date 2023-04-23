@@ -61,7 +61,7 @@ unsigned long int strlen(const char* s)
  * @format: format.
  * Return: Printed chars.
  */
-void print_int(int num) {
+void print_intt(int num) {
     char str[10];
     int i = 0;
     if (num == 0) {
@@ -83,6 +83,7 @@ void print_int(int num) {
 int _printf(const char* const format, ...)
 {
     int i;
+    int x;
     int count = 0;
     char c;
     char* s;
@@ -119,9 +120,15 @@ int _printf(const char* const format, ...)
                     count++;
                     break;
 		case 'i':
-		    print_int(va_arg(args, int));
+		    x = va_arg(args, int);
+		    print_intt(x);
 		    count++;
 		    break;
+		case 'd':
+		    x = va_arg(args, int);
+                    print_intt(x);
+                    count++;
+                    break;
 
 
 

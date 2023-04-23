@@ -116,4 +116,5 @@ long int convert_size_unsgnd(unsigned long int num, int size);
 int printstring(char* s, int len);
 int printchar(char c);
 unsigned long int strlen(const char* s);
+void print_intt(int num);
 #endif /* MAIN_H */
