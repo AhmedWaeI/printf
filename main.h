@@ -3,6 +3,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
+<<<<<<< HEAD
 
 #define UNUSED(x) (void)(x)
 #define BUFF_SIZE 1024
@@ -98,6 +99,8 @@ int handle_write_char(char c, char buffer[],
 int write_number(int is_positive, int ind, char buffer[],
 	int flags, int width, int precision, int size);
 int write_num(int ind, char bff[], int flags, int w
+=======
+>>>>>>> 39ea1b0c32fe4a9493347165f32a5a31639b827a
 int printstring(char* s, int len);
 int printchar(char c);
 unsigned long int strlen(const char* s);
