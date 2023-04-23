@@ -93,6 +93,11 @@ int _printf(const char* const format, ...)
                     len = strlen(s);
                     printstring(s, len);
                     count = count + len;
+		    break;
+		case '%':
+		    c = va_arg(args, int);
+                    printchar(c);
+                    count++;
                     break;
 
 
