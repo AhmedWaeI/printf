@@ -61,6 +61,25 @@ unsigned long int strlen(const char* s)
  * @format: format.
  * Return: Printed chars.
  */
+void print_int(int num) {
+    char str[10];
+    int i = 0;
+    if (num == 0) {
+        write(1, "0", 1);
+        return;
+    }
+    if (num < 0) {
+        write(1, "-", 1);
+        num = -num;
+    }
+    while (num > 0) {
+        str[i++] = num % 10 + '0';
+        num /= 10;
+    }
+    while (i > 0) {
+        write(1, &str[--i], 1);
+    }
+}
 int _printf(const char* const format, ...)
 {
     int i;
@@ -99,6 +118,11 @@ int _printf(const char* const format, ...)
                     printchar(c);
                     count++;
                     break;
+		case 'i':
+		    print_int(va_arg(args, int));
+		    count++;
+		    break;
+
 
 
 
