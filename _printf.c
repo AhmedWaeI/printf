@@ -3,11 +3,16 @@
 #include <stdio.h>
 #include <unistd.h>
 
+/************************* PRINT A STRING *************************/
 /**
- * sum_them_all - calculates the sum of all its parameters
- * @n: number of arguments passed to the function
- *
- * Return: the resulting sum
+ * print_string - Prints a string
+ * @types: List a of arguments
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width.
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Number of chars printed
  */
 
 int printstring(char* s, int len)
@@ -15,12 +20,31 @@ int printstring(char* s, int len)
     write(1, s, len);
     return (0);
 }
+/************************* PRINT CHAR *************************/
+
+/**
+ * print_char - Prints a char
+ * @types: List a of arguments
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: Width
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Number of chars printed
+ */
 int printchar(char c)
 {
     write(1, &c, 1);
     return (0);
 
 }
+
+/**
+ * _strlen - returns the length of a string
+ * @s: string to evaluate
+ *
+ * Return: the length of the string
+ */
 unsigned long int strlen(const char* s)
 {
     int i = 0;
@@ -32,6 +56,11 @@ unsigned long int strlen(const char* s)
 
     return (i);
 }
+/**
+ * _printf - Printf function
+ * @format: format.
+ * Return: Printed chars.
+ */
 int _printf(const char* const format, ...)
 {
     int i;
