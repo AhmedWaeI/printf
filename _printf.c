@@ -28,19 +28,9 @@ int _printf(const char *format, ...)
 		{
 			if (format[i] == '%' && format[i + 1] == '%')
 			{
-			    if(format[i+2] == 'd' || 'c' || 'i' || 's' )
-			    {
-			        printchar('%');
-			        printchar(format[i+2]);
-			        count++;
-			        count++;
-			        i = i + 3;
-			    }
-			    else{
-			printchar('%');
+				printchar('%');
 				count++;
 				i = i + 2;
-			    }
 			}
 			if (format[i] == '%')
 			{
