@@ -70,7 +70,10 @@ int _printf(const char *format, ...)
 				    	count = count + o;
 				    	break;
 
-			
+				default:
+					printchar('%');
+					count++;
+					break;
 			}
 			i++;
 		}
