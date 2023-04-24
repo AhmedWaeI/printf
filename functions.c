@@ -81,6 +81,17 @@ void print_intt(int num)
 		write(1, &str[--i], 1);
 	}
 }
+/************************* PRINT BINARY *************************/
+/**
+ * print_binary - Prints an unsigned number
+ * @types: Lista of arguments
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width.
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Numbers of char printed.
+ */
 int printbinary(int num)
 {
     int i;
