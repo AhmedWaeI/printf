@@ -53,9 +53,13 @@ int _printf(const char *format, ...)
 				case 'd':
 					x = va_arg(args, int);
 					print_intt(x);
-					for (l = 0; x != 0; l++)
+					if (x < 0)
 					{
-						x = x / 10;
+					    count++;
+					}
+					for(l = 0; x != 0; l++)
+					{
+					    x = x / 10;
 					}
 					count = count + l;
 					break;
