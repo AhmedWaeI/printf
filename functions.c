@@ -92,7 +92,7 @@ void print_intt(int num)
  * @size: Size specifier
  * Return: Numbers of char printed.
  */
-int printbinary(int num)
+unsigned int printbinary(int num)
 {
     int i;
     int j;
