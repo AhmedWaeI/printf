@@ -95,6 +95,10 @@ int _printf(const char* const format, ...)
     {
         return (-1);
     }
+    if (format[0] == '%' && !format[1])
+    {
+	    return (-1);
+    }
     if (format) {
         for (i = 0; format && format[i] != '\0'; i++)
         {
