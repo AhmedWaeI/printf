@@ -77,6 +77,15 @@ int _printf(const char *format, ...)
 			}
 			i++;
 		}
+		elseif (!((format[i] == '%' || format[i - 1] == '%')
+			      && ((format[i + 1] == 's' || format[i + 1] == 'c'
+				   || format[i + 1] == 'i' || format[i + 1] == 'd' || format[i + 1] == 'b' )
+				   	|| (format[i] == 's' || format[i] == 'c'  
+					    || format[i] == 'i' || format[i] == 'd' ||  format[i] == 'i'))))
+		{
+			printchar(format[i]);
+			count++;
+		}
 		else
 		{
 			printchar(format[i]);
