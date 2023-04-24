@@ -132,15 +132,13 @@ int _printf(const char *format, ...)
 					print_intt(x);
 					count++;
 					break;
-					
 				}
 			}
-			else if (!((format[i] == '%' || format[i - 1] == '%') &&
-           ((format[i + 1] == 's' || format[i + 1] == 'c' ||
-             format[i + 1] == 'i' || format[i + 1] == 'd') ||
-            (format[i] == 's' || format[i] == 'c' ||
-             format[i] == 'i' || format[i] == 'd'))))
-
+			if (!((format[i] == '%' || format[i - 1] == '%')
+			      && ((format[i + 1] == 's' || format[i + 1] == 'c'
+				   || format[i + 1] == 'i' || format[i + 1] == 'd')
+				   	|| (format[i] == 's' || format[i] == 'c'  
+					    || format[i] == 'i' || format[i] == 'd'))))
 			{
 				printchar(format[i]);
 				count++;
