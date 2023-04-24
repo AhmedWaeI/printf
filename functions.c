@@ -1,7 +1,9 @@
 #include "main.h"
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
+#include <stdarg.h>
 /**
  * printstring - Prints a string
  * @s: List of arguments
@@ -84,8 +86,8 @@ int printbinary(int num)
     int i;
     int j;
     int r;
-    int l;
     int *s;
+
     s = malloc(sizeof(int) * (32));
     for(i = 0; num != 0 ; i++)
     {
