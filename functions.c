@@ -111,5 +111,6 @@ unsigned int printbinary(unsigned int num)
     {
         print_intt(s[j]);
     }
+	free (s);
     return r;
 }
