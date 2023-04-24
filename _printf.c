@@ -12,103 +12,79 @@
  */
 int _printf(const char *format, ...)
 {
-    int i, count = 0;
-    char c;
-    char *s;
-    int len;
-    va_list args;
+	int i, x, count = 0;
+	int l;
+	unsigned int o;
+	char c, *s;
+	int len;
+	va_list args;
 
-    va_start(args, format);
+	va_start(args, format);
 
-    if (format == NULL)
-        return (-1);
+	if (format == NULL || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+	{
+	    return (-1);
 
-    for (i = 0; format[i] != '\0'; i++)
-    {
-        if (format[i] == '%' && format[i + 1] == '%')
-        {
-            write(1, &format[i], 1);
-            i++;
-            count++;
-        }
-        else if (format[i] == '%')
-        {
-            switch (format[i + 1])
-            {
-                case 'c':
-                    c = va_arg(args, int);
-                    write(1, &c, 1);
-                    count++;
-                    break;
+	}
 
-                case 's':
-                    s = va_arg(args, char*);
-                    if (s == NULL)
-                        return (-1);
-                    len = 0;
-                    while (s[len] != '\0')
-                        len++;
-                    write(1, s, len);
-                    count += len;
-                    break;
+	for (i = 0; format[i] != '\0'; i++)
+	{
+		if (format[i] == '%' && format[i + 1] == '%')
+		{
+			printchar('%');
+			i++;
+			count++;
+		}
+		else if (format[i] == '%')
+		{
+			switch (format[i + 1])
+			{
+				case 'c':
+					c = va_arg(args, int);
+					printchar(c);
+					count++;
+					break;
 
-                case 'i':
-                case 'd':
-                    int num = va_arg(args, int);
-                    int digit_count = 0;
-                    int is_negative = 0;
+				case 's':
+					s = va_arg(args, char*);
+					len = strllen(s);
+					printstring(s, len);
+					count += len;
+					break;
 
-                    if (num == 0)
-                    {
-                        write(1, "0", 1);
-                        count++;
-                        break;
-                    }
+				case 'i':
+				case 'd':
+					x = va_arg(args, int);
+					print_intt(x);
+					if (x < 0)
+						count++;
+					for (l = 0; x != 0; l++)
+						x /= 10;
+					count += l;
+					break;
+				case 'b':
+					o = va_arg(args, unsigned int);
+				    	o = printbinary(o);
+				    	count = count + o;
+				    	break;
 
-                    if (num < 0)
-                    {
-                        write(1, "-", 1);
-                        is_negative = 1;
-                        num = -num;
-                        count++;
-                    }
+				default:
+					printchar('%');
+					count++;
+					break;
+			}
+			i++;
+		}
+			else
+		{
+			printchar(format[i]);
+			count++;
+		}
+		
+	}
 
-                    int temp = num;
-                    while (temp != 0)
-                    {
-                        digit_count++;
-                        temp /= 10;
-                    }
-
-                    char digits[digit_count];
-                    for (int j = digit_count - 1; j >= 0; j--)
-                    {
-                        digits[j] = num % 10 + '0';
-                        num /= 10;
-                    }
-
-                    write(1, digits, digit_count);
-                    count += digit_count;
-
-                    break;
-
-                case '%':
-                    write(1, &format[i], 1);
-                    count++;
-                    break;
-
-                default:
-                    return (-1);
-            }
-            i++;
-        }
-        else
-        {
-            write(1, &format[i], 1);
-            count++;
-        }
-    }
-
-    va_end(args);
-    return (count);
+	va_end(args);
+	return (count);
 }
