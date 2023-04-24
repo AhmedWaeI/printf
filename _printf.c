@@ -3,6 +3,27 @@
 #include <stdio.h>
 #include <unistd.h>
 
+int printbinary(int num)
+{
+    int i;
+    int j;
+    int r;
+    int l;
+    int *s;
+    s = malloc(sizeof(int) * (32));
+    for(i = 0; num != 0 ; i++)
+    {
+        s[i]= num % 2;
+        num = num / 2;
+        
+    }
+    r = i;
+    for(j = i - 1; j >= 0; j--)
+    {
+        print_intt(s[j]);
+    }
+    return r;
+}
 /**
  * _printf - Printf function
  * @format: format string
@@ -62,6 +83,11 @@ int _printf(const char *format, ...)
 						x /= 10;
 					count += l;
 					break;
+				case 'b':
+					x = va_arg(args, int);
+				    	x = printbinary(x);
+				    	count = count + x;
+				    	break;
 
 				default:
 					printchar('%');
