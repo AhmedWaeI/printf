@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <unistd.h>
 
-
 /**
  * _printf - Printf function
  * @format: format string
@@ -13,6 +12,7 @@
 int _printf(const char *format, ...)
 {
 	int i, x, count = 0;
+	int l;
 	char c, *s;
 	int len;
 	va_list args;
@@ -53,7 +53,11 @@ int _printf(const char *format, ...)
 				case 'd':
 					x = va_arg(args, int);
 					print_intt(x);
-					count++;
+					for (l = 0; x != 0; l++)
+					{
+						x = x / 10;
+					}
+					count = count + l;
 					break;
 				default:
 					break;
