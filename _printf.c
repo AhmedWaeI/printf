@@ -135,7 +135,8 @@ int _printf(const char* const format, ...)
 
                 }
             }
-            if (!((format[i] == '%' || format[i - 1] == '%') && ((format[i + 1] == 's' || format[i + 1] == 'c' ) || (format[i] == 's' || format[i] == 'c' ))))
+            if (format[i] != '%' || format[i + 1] == '\0' || (format[i + 1] != 's' && format[i + 1] != 'c' && format[i + 1] != '%' && format[i + 1] != 'i' && format[i + 1] != 'd'))
+
 
             {
                 printchar(format[i]);
