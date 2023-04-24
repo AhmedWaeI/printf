@@ -13,6 +13,7 @@
 int _printf(const char *format, ...)
 {
 	int i, x, count = 0;
+	unsigned int o;
 	int l;
 	char c, *s;
 	int len;
@@ -64,8 +65,8 @@ int _printf(const char *format, ...)
 					count += l;
 					break;
 				case 'b':
-					x = va_arg(args, int);
-				    	x = printbinary(x);
+					o = va_arg(args, unsigned int);
+				    	o = printbinary(x);
 				    	count = count + x;
 				    	break;
 
