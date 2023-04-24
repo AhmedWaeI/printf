@@ -50,7 +50,7 @@ unsigned long int strlen(const char *s)
 
 	while (s[i] != '\0')
 	{
-		i++
+		i++;
 	}
 	return (i);
 }
