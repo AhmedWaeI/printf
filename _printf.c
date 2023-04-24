@@ -29,12 +29,12 @@ int printchar(char c)
 }
 
 /**
- * _strlen - returns the length of a string
+ * strllen - returns the length of a string
  * @s: string to evaluate
  *
  * Return: the length of the string
  */
-unsigned long int _strlen(const char *s)
+unsigned long int strllen(const char *s)
 {
 	unsigned long int i = 0;
 
