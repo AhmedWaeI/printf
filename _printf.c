@@ -22,20 +22,18 @@ int _printf(const char *format, ...)
 	if (format == NULL)
 		return (-1);
 
-	if (format)
+	for (i = 0; format[i] != '\0'; i++)
 	{
-		for (i = 0; format && format[i] != '\0'; i++)
+		if (format[i] == '%' && format[i + 1] == '%')
 		{
-			if (format[i] == '%' && format[i + 1] == '%')
+			printchar('%');
+			i++;
+			count++;
+		}
+		else if (format[i] == '%')
+		{
+			switch (format[i + 1])
 			{
-				printchar('%');
-				count++;
-				i = i + 2;
-			}
-			if (format[i] == '%')
-			{
-				switch (format[i + 1])
-				{
 				case 'c':
 					c = va_arg(args, int);
 					printchar(c);
@@ -46,7 +44,7 @@ int _printf(const char *format, ...)
 					s = va_arg(args, char*);
 					len = strllen(s);
 					printstring(s, len);
-					count = count + len;
+					count += len;
 					break;
 
 				case 'i':
@@ -54,30 +52,26 @@ int _printf(const char *format, ...)
 					x = va_arg(args, int);
 					print_intt(x);
 					if (x < 0)
-					{
-					    count++;
-					}
-					for(l = 0; x != 0; l++)
-					{
-					    x = x / 10;
-					}
-					count = count + l;
+						count++;
+					for (l = 0; x != 0; l++)
+						x /= 10;
+					count += l;
 					break;
+
 				default:
+					printchar('%');
+					count++;
 					break;
-				}
 			}
-			if (!((format[i] == '%' || format[i - 1] == '%')
-			      && ((format[i + 1] == 's' || format[i + 1] == 'c'
-				   || format[i + 1] == 'i' || format[i + 1] == 'd')
-				   	|| (format[i] == 's' || format[i] == 'c'  
-					    || format[i] == 'i' || format[i] == 'd'))))
-			{
-				printchar(format[i]);
-				count++;
-			}
+			i++;
 		}
-		va_end(args);
+		else
+		{
+			printchar(format[i]);
+			count++;
+		}
 	}
+
+	va_end(args);
 	return (count);
 }
