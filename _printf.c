@@ -1,20 +1,8 @@
-#include "main.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <unistd.h>
-
-
-/**
- * _printf - Printf function
- * @format: format string
- *
- * Return: Number of printed chars
- */
 int _printf(const char *format, ...)
 {
 	int i, x, count = 0;
-	unsigned int o;
 	int l;
+	unsigned int o;
 	char c, *s;
 	int len;
 	va_list args;
@@ -70,10 +58,7 @@ int _printf(const char *format, ...)
 				    	count = count + o;
 				    	break;
 
-				default:
-					printchar('%');
-					count++;
-					break;
+			
 			}
 			i++;
 		}
