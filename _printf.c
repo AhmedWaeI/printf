@@ -26,14 +26,11 @@ int _printf(const char *format, ...)
 	{
 		for (i = 0; format && format[i] != '\0'; i++)
 		{
-		     if (format[i] == '%' && format[i + 1] == '%' )
+			if (format[i] == '%' && format[i + 1] == '%')
 			{
-			    
-				printchar(format[i + 1]);
-				printchar(format[i + 2]);
-				count = count + 2;
+				printchar('%');
+				count++;
 				i = i + 2;
-				continue;
 			}
 			if (format[i] == '%')
 			{
@@ -54,15 +51,11 @@ int _printf(const char *format, ...)
 
 				case 'i':
 				case 'd':
-						x = va_arg(args, int);
+					x = va_arg(args, int);
 					print_intt(x);
-					if (x < 0)
+					for (l = 0; x != 0; l++)
 					{
-					    count++;
-					}
-					for(l = 0; x != 0; l++)
-					{
-					    x = x / 10;
+						x = x / 10;
 					}
 					count = count + l;
 					break;
