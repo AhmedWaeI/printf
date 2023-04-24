@@ -103,6 +103,7 @@ int _printf(const char* const format, ...)
                     printchar('%');
                     count++;
                     i=i+2;
+		    continue;
                  
             }
             if (format[i] == '%')
