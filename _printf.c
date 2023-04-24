@@ -66,7 +66,7 @@ int _printf(const char *format, ...)
 					break;
 				case 'b':
 					o = va_arg(args, unsigned int);
-				    	o = printbinary(x);
+				    	o = printbinary(o);
 				    	count = count + o;
 				    	break;
 
