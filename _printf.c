@@ -132,6 +132,8 @@ int _printf(const char *format, ...)
 					print_intt(x);
 					count++;
 					break;
+				default:
+					break;
 				}
 			}
 			if (!((format[i] == '%' || format[i - 1] == '%')
