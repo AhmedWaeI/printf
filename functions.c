@@ -1,4 +1,7 @@
 #include "main.h"
+#include <stdarg.h>
+#include <stdio.h>
+#include <unistd.h>
 /**
  * printstring - Prints a string
  * @s: List of arguments
