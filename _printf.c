@@ -121,7 +121,7 @@ int _printf(const char *format, ...)
 
 				case 's':
 					s = va_arg(args, char*);
-					len = _strlen(s);
+					len = strllen(s);
 					printstring(s, len);
 					count = count + len;
 					break;
