@@ -18,7 +18,7 @@
 int printstring(char* s, int len)
 {
     write(1, s, len);
-    return (0);
+    return (len);
 }
 /************************* PRINT CHAR *************************/
 
@@ -35,7 +35,7 @@ int printstring(char* s, int len)
 int printchar(char c)
 {
     write(1, &c, 1);
-    return (0);
+    return (1);
 
 }
 
