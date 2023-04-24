@@ -75,7 +75,6 @@ int _printf(const char *format, ...)
 					count++;
 					break;
 			}
-			i++;
 		}
 		if (!((format[i] == '%' || format[i - 1] == '%')
 			      && ((format[i + 1] == 's' || format[i + 1] == 'c'
