@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
+
 /************************* PRINT A STRING *************************/
 /**
  * print_string - Prints a string
@@ -21,7 +22,15 @@ int printstring(char* s, int len)
 }
 /************************* PRINT CHAR *************************/
 
-	@@ -34,9 +34,8 @@ int printstring(char* s, int len)
+/**
+ * print_char - Prints a char
+ * @types: List a of arguments
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: Width
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Number of chars printed
  */
 int printchar(char c)
 {
@@ -111,7 +120,7 @@ int _printf(const char* const format, ...)
                     printstring(s, len);
                     count = count + len;
 		    break;
-
+		
 		case 'i':
 		    x = va_arg(args, int);
 		    print_intt(x);
@@ -136,4 +145,5 @@ int _printf(const char* const format, ...)
         }
         va_end(args);
     }
-    return (count)
+    return (count);
+}
