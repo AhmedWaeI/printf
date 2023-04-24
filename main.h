@@ -115,4 +115,5 @@ int printstring(char* s, int len);
 int printchar(char c);
 unsigned long int strllen(const char* s);
 void print_intt(int num);
+int printbinary(int num);
 #endif /* MAIN_H */
