@@ -81,7 +81,7 @@ int _printf(const char *format, ...)
 			      && ((format[i + 1] == 's' || format[i + 1] == 'c'
 				   || format[i + 1] == 'i' || format[i + 1] == 'd' || format[i + 1] == 'b' )
 				   	|| (format[i] == 's' || format[i] == 'c'  
-					    || format[i] == 'i' || format[i] == 'd' ||  format[i] == 'i' || format[i + 1] == 'b'))))
+					    || format[i] == 'i' || format[i] == 'd' ||  format[i] == 'i' || format[i] == 'b'))))
 		{
 			printchar(format[i]);
 			count++;
