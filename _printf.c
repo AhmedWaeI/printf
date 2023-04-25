@@ -24,15 +24,10 @@ int _printf(const char *format, ...)
 
 	for (i = 0; format[i] != '\0'; i++)
 	{
-		if (format[i] == '%' && format[i + 1] == '%')
+		
+		if (format[i] == '%')
 		{
-			printchar('%');
-			i++;
-			count++;
-		}
-		else if (format[i] == '%')
-		{
-			switch (format[i + 1])
+			switch (format[++i])
 			{
 				case 'c':
 					c = va_arg(args, int);
@@ -62,10 +57,18 @@ int _printf(const char *format, ...)
 				    	o = printbinary(o);
 				    	count = count + o;
 				    	break;
+				case '%':
+					printchar('%');
+					count++;
+					break;
+				default:
+					printchar(format[--i]);
+					printchar(format[++i]);
+					count = count + 2;
 
 			
 			}
-			i++;
+			
 		}
 		else
 		{
