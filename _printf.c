@@ -57,6 +57,10 @@ int _printf(const char *format, ...)
 				    	o = printbinary(o);
 				    	count = count + o;
 				    	break;
+				case '%':
+					write(1, "%", 1);
+					counter++;
+					break;
 				default:
 					write(1, &format[--i], 1);
 					write(1, &format[++i], 1);
