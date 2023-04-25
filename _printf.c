@@ -59,7 +59,7 @@ int _printf(const char *format, ...)
 				    	break;
 				case '%':
 					write(1, "%", 1);
-					counter++;
+					count++;
 					break;
 				default:
 					write(1, &format[--i], 1);
