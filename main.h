@@ -14,3 +14,4 @@ unsigned long int strllen(const char* s);
 void print_intt(int num);
 unsigned int printbinary(unsigned int num);
 
+#endif /* MAIN_H */
