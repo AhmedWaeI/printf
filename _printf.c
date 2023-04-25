@@ -24,13 +24,8 @@ int _printf(const char *format, ...)
 
 	for (i = 0; format[i] != '\0'; i++)
 	{
-		if (format[i] == '%' && format[i + 1] == '%')
-		{
-			printchar('%');
-			i =  i + 2;
-			count++;
-		}
-		else if (format[i] == '%')
+		
+		if (format[i] == '%')
 		{
 			switch (format[i + 1])
 			{
@@ -69,7 +64,6 @@ int _printf(const char *format, ...)
 
 			
 			}
-			i++;
 			
 		}
 		else
