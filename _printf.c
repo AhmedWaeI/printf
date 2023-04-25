@@ -58,13 +58,13 @@ int _printf(const char *format, ...)
 				    	count = count + o;
 				    	break;
 				case '%':
-					write(1, "%", 1);
+					printchar('%');
 					count++;
 					break;
 				default:
-					write(1, &format[--i], 1);
-					write(1, &format[++i], 1);
-					count += 2;
+					printchar(format[--i]);
+					printchar(format[++i]);
+					count = count + 2;
 
 			
 			}
