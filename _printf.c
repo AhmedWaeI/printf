@@ -62,6 +62,10 @@ int _printf(const char *format, ...)
 				    	o = printbinary(o);
 				    	count = count + o;
 				    	break;
+				default:
+					write(1, &format[--i], 1);
+					write(1, &format[++i], 1);
+					counter += 2;
 
 			
 			}
