@@ -1,1 +1,1 @@
-this is group project between two people
+Implementing the printf function from scratch 
